@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.profile.ProfileFragment">
+    
+    <androidx.cardview.widget.CardView
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:elevation="12dp"
+        android:id="@+id/view2"
+        app:cardCornerRadius="124dp"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal">
+    
+    <ImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:src="@drawable/corners"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center|top"/>
+</androidx.cardview.widget.CardView>
+    <EditText
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Please write your name"
+        android:paddingStart="20dp"
+        android:layout_gravity="center"/>
+
+
+</FrameLayout>
