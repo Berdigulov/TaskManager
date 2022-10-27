@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            navView.isVisible = bottomNavFragments.contains(destination.id)
+            navView.isVisible  = bottomNavFragments.contains(destination.id)
             if(destination.id == R.id.onBoardingFragment){
                 supportActionBar?.hide()
             }else supportActionBar?.show()
