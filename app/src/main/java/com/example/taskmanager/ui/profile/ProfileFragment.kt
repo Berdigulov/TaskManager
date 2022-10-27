@@ -1,54 +1,66 @@
 package com.example.taskmanager.ui.profile
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.taskmanager.R
-import com.example.taskmanager.databinding.FragmentNotificationsBinding
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
+import com.example.taskmanager.data.loadImage
+import com.example.taskmanager.data.local.Pref
+import com.example.taskmanager.data.local.PreferenceManager
 import com.example.taskmanager.databinding.FragmentProfileBinding
+import java.io.ByteArrayOutputStream
 
-class ProfileFragment : Fragment() {
-    private val mContent =
+
+class ProfileFragment:Fragment() {
+
+    private lateinit var binding: FragmentProfileBinding
+    private lateinit var pref: Pref
+    private lateinit var preferenceManager: PreferenceManager
+
+    private var galleryActivityLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(
-            ActivityResultContracts.GetContent(),
-            ActivityResultCallback {
-                binding.ivProfile.setImageURI(it)
-            })
-
-    private var _binding: FragmentProfileBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+            ActivityResultContracts.OpenDocument()
+        ) { result ->
+            if (result != null) {
+                binding.profileImage.loadImage(result.toString())
+            } else {
+                Log.d("dad", "onActivityResult: the result is null for some reason")
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-
-
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+    ): View? {
+        binding = FragmentProfileBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.ivProfile.setOnClickListener {
-            mContent.launch("image/*")
+        pref = Pref(requireContext())
+        binding.profileImage.setOnClickListener {
+            galleryActivityLauncher.launch(arrayOf("image/*"))
         }
-    }
+        binding.etName.setText(pref.getName())
+        binding.etName.addTextChangedListener {
+            pref.saveName(binding.etName.text.toString())
+        }
 
-
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        binding.etAge.setText(pref.getAge())
+        binding.etAge.addTextChangedListener {
+            pref.saveAge(binding.etAge.text.toString())
+        }
+        
     }
 }

@@ -19,11 +19,17 @@ class TaskAdapter:RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     }
 
     override fun getItemCount(): Int = tasks.size
+
+
     inner class TaskViewHolder(private val binding: ItemTaskBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(){
             val item = tasks[adapterPosition]
             binding.tvTitle.text = item.title
             binding.tvDescription.text = item.description
         }
+    }
+    fun addTask(task: Task){
+        tasks.add(0, task)
+        notifyItemChanged(0)
     }
 }
