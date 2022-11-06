@@ -1,6 +1,7 @@
 package com.example.taskmanager
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -37,7 +38,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_profile, R.id.taskFragment, R.id.onBoardingFragment
             )
         )
-        val bottomNavFragments = arrayListOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_profile)
+        val bottomNavFragments = arrayListOf(R.id.navigation_home, R.id.navigation_dashboard,
+                                             R.id.navigation_notifications, R.id.navigation_profile)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->

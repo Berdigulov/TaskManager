@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = TaskAdapter()
+        adapter = TaskAdapter(requireContext())
     }
 
     override fun onCreateView(

@@ -29,11 +29,22 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnAdd.setOnClickListener {
-            val task = Task(binding.etTitle.text.toString(),binding.etDesc.text.toString())
+
+            saveTask()
+        }
+    }
+    private fun saveTask(){
+        if(binding.etTitle.text?.isNotEmpty() == true){
+            val task = Task(
+                title = binding.etTitle.text.toString(),
+                description = binding.etDesc.text.toString()
+            )
             setFragmentResult(
                 HomeFragment.TASK, bundleOf("key_task" to task)
             )
             findNavController().navigateUp()
+        }else {
+            binding.etTitle.error = "Input title"
         }
     }
 

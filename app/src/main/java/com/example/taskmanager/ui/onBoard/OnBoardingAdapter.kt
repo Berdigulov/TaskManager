@@ -35,7 +35,7 @@ class OnBoardingAdapter(private val onClick:() -> Unit): RecyclerView.Adapter<On
             val item = array[adapterPosition]
             binding.tvTitle.text = onBoard.title
             binding.tvDescription.text = onBoard.desc
-            binding.ivBoard.setAnimation(onBoard.image!!)
+            onBoard.image?.let { binding.ivBoard.setAnimation(it) }
             binding.btnStart.isVisible = adapterPosition == array.lastIndex
             if(adapterPosition != array.lastIndex){
                 binding.tvSkip.visibility = View.VISIBLE
@@ -47,6 +47,7 @@ class OnBoardingAdapter(private val onClick:() -> Unit): RecyclerView.Adapter<On
             }
             binding.tvSkip.setOnClickListener {
                 onClick()
+                Log.d("dad","click")
             }
         }
 

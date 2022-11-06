@@ -15,7 +15,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.taskmanager.data.loadImage
 import com.example.taskmanager.data.local.Pref
-import com.example.taskmanager.data.local.PreferenceManager
 import com.example.taskmanager.databinding.FragmentProfileBinding
 import java.io.ByteArrayOutputStream
 
@@ -24,7 +23,6 @@ class ProfileFragment:Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var pref: Pref
-    private lateinit var preferenceManager: PreferenceManager
 
     private var galleryActivityLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(
@@ -51,7 +49,9 @@ class ProfileFragment:Fragment() {
         pref = Pref(requireContext())
         binding.profileImage.setOnClickListener {
             galleryActivityLauncher.launch(arrayOf("image/*"))
+            Log.d("dad","img")
         }
+
         binding.etName.setText(pref.getName())
         binding.etName.addTextChangedListener {
             pref.saveName(binding.etName.text.toString())

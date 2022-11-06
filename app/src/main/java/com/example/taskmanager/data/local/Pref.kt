@@ -10,7 +10,7 @@ class Pref(private var context: Context) {
         return pref.getBoolean(SHOW_BOARDING,false)
     }
 
-    fun saveBoardingShow(isShow:Boolean){
+    fun saveBoardingShow(isShow: Boolean){
         pref.edit().putBoolean(SHOW_BOARDING,isShow).apply()
 
     }
