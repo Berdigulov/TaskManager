@@ -9,7 +9,11 @@ import com.example.taskmanager.R
 import com.example.taskmanager.data.Task
 import com.example.taskmanager.databinding.ItemTaskBinding
 
-class TaskAdapter(private val context: Context):RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(
+    private val context: Context,
+    private val onLongClick: (task: Task) -> Unit,
+    private val onClick: (task: Task) -> Unit)
+    :RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     private val tasks = arrayListOf<Task>()
 
@@ -19,7 +23,16 @@ class TaskAdapter(private val context: Context):RecyclerView.Adapter<TaskAdapter
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind()
+        holder.itemView.setOnLongClickListener {
+            onLongClick(tasks[position])
+            false
+        }
+
+        holder.itemView.setOnClickListener {
+            onClick(tasks[position])
+        }
     }
+
 
     override fun getItemCount(): Int = tasks.size
 
@@ -43,5 +56,15 @@ class TaskAdapter(private val context: Context):RecyclerView.Adapter<TaskAdapter
     fun addTask(task: Task){
         tasks.add(0, task)
         notifyItemChanged(0)
+    }
+
+    fun addAllTasks(list: List<Task>){
+        tasks.clear()
+        tasks.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun getAllTask(position: Int): Task{
+        return tasks[position]
     }
 }
