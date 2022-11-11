@@ -14,4 +14,9 @@
     <string name="get_started">Get Started</string>
     <string name="name">Name</string>
     <string name="age">Age</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="send">Send</string>
+    <string name="sms_code">SMS code</string>
+    <string name="accept">Accept</string>
+    <string name="didn_t_get_otp_resend">Didn\'t get OTP? <b>Resend</b></string>
 </resources>

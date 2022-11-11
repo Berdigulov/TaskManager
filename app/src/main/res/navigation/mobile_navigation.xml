@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/authFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -42,4 +42,9 @@
         android:name="com.example.taskmanager.ui.auth.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" />
+    <fragment
+        android:id="@+id/authAcceptFragment"
+        android:name="com.example.taskmanager.ui.auth.AuthAcceptFragment"
+        android:label="fragment_auth_accept"
+        tools:layout="@layout/fragment_auth_accept" />
 </navigation>
